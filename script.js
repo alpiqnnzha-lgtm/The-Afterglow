@@ -25,6 +25,7 @@ function toggleAudio() {
     const audio = document.getElementById('audio');
     const btn = document.getElementById('play-btn');
     const lyricsEl = document.getElementById('lyrics-text');
+    const aboutYouEl = document.querySelector('.sub-lyrics-section'); // Seleksi lirik About You
     
     if (!audio || !btn) return;
 
@@ -32,13 +33,17 @@ function toggleAudio() {
         audio.play().catch(e => console.error("Audio playback failed:", e));
         btn.innerHTML = "Pause Memory";
         
-        // Lirik utama ngetik dengan kecepatan 120ms (lebih dramatis/pelan)
+        // 1. Lirik utama ngetik
         typeWriter(lyricsText, "lyrics-text", 120); 
+        
+        // 2. Munculkan lirik About You dengan fade-in
+        if (aboutYouEl) aboutYouEl.style.opacity = "1";
     } else {
         audio.pause();
         btn.innerHTML = "Play Memory";
-        // Lirik dibersihkan saat lagu dipause
+        // Reset tampilan
         lyricsEl.innerHTML = "";
+        if (aboutYouEl) aboutYouEl.style.opacity = "0";
     }
 }
 
@@ -48,13 +53,11 @@ function toggleLetter() {
     
     modal.classList.toggle('hidden');
     
-    // Ketik surat hanya saat modal dibuka
     if (!modal.classList.contains('hidden')) {
         typeWriter(letterContent, "letter-text", 30);
     }
 }
 
-// Event listener untuk rahasia
 const secretBtn = document.getElementById('secret-btn');
 if (secretBtn) {
     secretBtn.addEventListener('click', () => {
@@ -63,8 +66,6 @@ if (secretBtn) {
     });
 }
 
-// Jalankan saat halaman siap
 window.onload = () => {
-    // Judul utama jalan duluan
     typeWriter(mainText, "typing-text", 40);
 };
