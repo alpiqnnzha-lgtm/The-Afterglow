@@ -4,6 +4,7 @@ const letterContent = "This journey wasn't about the destination, but the echoes
 function typeWriter(text, id, speed, callback) {
     let i = 0;
     const element = document.getElementById(id);
+    if (!element) return; // Mencegah error kalau elemen tidak ketemu
     element.innerHTML = "";
     function typing() {
         if (i < text.length) {
@@ -18,8 +19,10 @@ function typeWriter(text, id, speed, callback) {
 function toggleAudio() {
     const audio = document.getElementById('audio');
     const btn = document.getElementById('play-btn');
+    
+    // Cek apakah audio benar-benar load
     if (audio.paused) {
-        audio.play();
+        audio.play().catch(e => console.log("Audio play blocked:", e));
         btn.innerHTML = "Pause Memory";
     } else {
         audio.pause();
@@ -30,13 +33,19 @@ function toggleAudio() {
 function toggleLetter() {
     const modal = document.getElementById('letter-modal');
     modal.classList.toggle('hidden');
+    
+    // Tambahkan pengecekan agar efek ketik cuma jalan kalau modal dibuka
     if (!modal.classList.contains('hidden')) {
         typeWriter(letterContent, "letter-text", 30);
     }
 }
 
 document.getElementById('secret-btn').addEventListener('click', () => {
-    document.getElementById('easter-egg').classList.remove('hidden');
+    const egg = document.getElementById('easter-egg');
+    if(egg) egg.classList.remove('hidden');
 });
 
-window.onload = () => typeWriter(mainText, "typing-text", 40);
+// Jalankan saat load
+window.onload = () => {
+    typeWriter(mainText, "typing-text", 40);
+};
