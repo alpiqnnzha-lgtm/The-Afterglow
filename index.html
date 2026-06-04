@@ -47,20 +47,6 @@
                 <span class="lyric-line">I can't forget."</span>
             </div>
 
-            <!-- Audio player -->
-            <div class="audio-controls">
-                <!-- About You -->
-                <div class="audio-item">
-                    <span class="audio-label">🎵 About You</span>
-                    <button onclick="toggleMainAudio()" class="neon-btn" id="play-btn">Play</button>
-                </div>
-                <!-- Backsound -->
-                <div class="audio-item">
-                    <span class="audio-label">🌊 Backsound</span>
-                    <button onclick="toggleBacksound()" class="neon-btn" id="back-btn">Play</button>
-                </div>
-            </div>
-
             <!-- Audio elements -->
             <audio id="audio" loop preload="auto">
                 <source src="song.mp3" type="audio/mpeg">
@@ -68,6 +54,8 @@
             <audio id="backsound" loop preload="auto">
                 <source src="backsound.mp3" type="audio/mpeg">
             </audio>
+
+            <button onclick="toggleAudio()" class="neon-btn" id="play-btn">Play Memory</button>
 
         </div>
 
