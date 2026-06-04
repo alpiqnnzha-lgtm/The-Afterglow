@@ -32,14 +32,20 @@ body, html {
     margin-bottom: 10px; min-height: 60px;
 }
 
-/* Lirik Pelengkap (Tipis di bawah) */
+/* Lirik Pelengkap (Sesuai request: muncul pas di-klik) */
 .sub-lyrics-section {
-    margin: 50px auto 30px auto;
+    margin: 30px auto; 
     text-align: center; width: 80%;
-    font-size: 0.85rem; color: #666;
-    font-style: italic; opacity: 0;
-    animation: fadeIn 3s ease-in-out forwards;
-    animation-delay: 2s;
+    font-size: 1rem; color: #e0e0e0; 
+    font-family: 'Georgia', serif; 
+    font-style: italic; 
+    opacity: 0; /* Awalnya tersembunyi */
+    transition: opacity 1s ease-in-out; /* Transisi halus */
+}
+
+/* Class ini yang bakal di-add/remove sama JS */
+.sub-lyrics-section.show {
+    opacity: 1;
 }
 
 .divider {
@@ -63,7 +69,7 @@ body, html {
 .card:hover { filter: grayscale(0%); transform: scale(1.05); }
 
 /* Narasi & Kontrol */
-.bottom-section { margin-top: 50px; text-align: center; width: 100%; }
+.bottom-section { margin-top: 30px; text-align: center; width: 100%; }
 
 .narration-section {
     margin: 30px auto; padding: 20px; max-width: 500px;
