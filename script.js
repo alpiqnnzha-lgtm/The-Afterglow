@@ -31,12 +31,13 @@ function toggleAudio() {
     if (audio.paused) {
         audio.play().catch(e => console.error("Audio playback failed:", e));
         btn.innerHTML = "Pause Memory";
-        // Saat lagu diputar, lirik langsung ngetik
-        typeWriter(lyricsText, "lyrics-text", 80);
+        
+        // Lirik utama ngetik dengan kecepatan 120ms (lebih dramatis/pelan)
+        typeWriter(lyricsText, "lyrics-text", 120); 
     } else {
         audio.pause();
         btn.innerHTML = "Play Memory";
-        // Saat lagu dipause, lirik dibersihkan
+        // Lirik dibersihkan saat lagu dipause
         lyricsEl.innerHTML = "";
     }
 }
@@ -62,7 +63,8 @@ if (secretBtn) {
     });
 }
 
-// Jalankan saat halaman siap (hanya untuk judul)
+// Jalankan saat halaman siap
 window.onload = () => {
+    // Judul utama jalan duluan
     typeWriter(mainText, "typing-text", 40);
 };
