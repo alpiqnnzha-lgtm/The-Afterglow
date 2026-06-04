@@ -23,6 +23,7 @@ function typeWriter(text, id, speed, callback) {
 }
 
 // ── Lyric lines fade-in per baris ──
+// 3 baris, total ~17 detik → tiap baris muncul tiap ~5500ms
 let lyricTimer = null;
 
 function showLyricLines() {
@@ -34,7 +35,7 @@ function showLyricLines() {
         if (idx >= lines.length) return;
         lines[idx].classList.add('visible');
         idx++;
-        lyricTimer = setTimeout(next, 900);
+        lyricTimer = setTimeout(next, 5500); // ~5.5 detik per baris → 3 baris = ~16.5 detik
     }
     // mulai setelah lirik utama selesai ngetik
     lyricTimer = setTimeout(next, lyricsText.length * 120 + 400);
@@ -56,7 +57,6 @@ function toggleAudio() {
     if (!audio || !btn) return;
 
     if (audio.paused) {
-        // Play keduanya sekaligus
         audio.play().catch(e => console.error("Audio error:", e));
         if (backsound) backsound.play().catch(e => console.error("Backsound error:", e));
 
@@ -70,13 +70,11 @@ function toggleAudio() {
         showLyricLines();
 
     } else {
-        // Pause keduanya
         audio.pause();
         if (backsound) backsound.pause();
 
         btn.textContent = "Play Memory";
 
-        // Reset lirik
         if (lyricsEl) lyricsEl.innerHTML = "";
         if (subLyrics) subLyrics.classList.remove('show');
         hideLyricLines();
