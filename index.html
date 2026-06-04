@@ -8,13 +8,16 @@
 </head>
 <body>
 
+    <!-- Video Background -->
     <video autoplay muted loop playsinline class="bg-video">
         <source src="images/background.mp4" type="video/mp4">
     </video>
 
     <div class="container">
+        <!-- Judul (Hanya Fade In, tidak ada efek ketik) -->
         <h1 id="typing-text" class="fade-in">Digital Shrine</h1>
 
+        <!-- Lirik dengan Efek Ketik -->
         <div class="audio-lirik-section">
             <div class="lyrics-container">
                 <p id="lyrics-text"></p>
@@ -25,6 +28,7 @@
             </audio>
         </div>
 
+        <!-- Galeri Foto -->
         <div class="gallery-grid">
             <img src="images/mantan1.jpg" class="card">
             <img src="images/mantan2.jpg" class="card">
@@ -34,14 +38,17 @@
             <img src="images/songmin2.jpg" class="card idol">
         </div>
 
+        <!-- Tombol Kontrol Bawah (Pastikan posisi ini di paling bawah container) -->
         <div class="controls">
             <button id="secret-btn" class="neon-btn">Unveil Secret</button>
             <button onclick="toggleLetter()" class="neon-btn">Open The Letter</button>
         </div>
 
+        <!-- Easter Egg -->
         <p id="easter-egg" class="hidden">Hidden Truth: Everything ends so something better can begin. You're doing great.</p>
     </div>
 
+    <!-- Modal Surat -->
     <div id="letter-modal" class="hidden">
         <div class="letter-content">
             <h2>A Note for You</h2>
