@@ -24,14 +24,20 @@ function typeWriter(text, id, speed, callback) {
 function toggleAudio() {
     const audio = document.getElementById('audio');
     const btn = document.getElementById('play-btn');
+    const lyricsEl = document.getElementById('lyrics-text');
+    
     if (!audio || !btn) return;
 
     if (audio.paused) {
         audio.play().catch(e => console.error("Audio playback failed:", e));
         btn.innerHTML = "Pause Memory";
+        // Saat lagu diputar, lirik langsung ngetik
+        typeWriter(lyricsText, "lyrics-text", 80);
     } else {
         audio.pause();
         btn.innerHTML = "Play Memory";
+        // Saat lagu dipause, lirik dibersihkan
+        lyricsEl.innerHTML = "";
     }
 }
 
@@ -56,12 +62,7 @@ if (secretBtn) {
     });
 }
 
-// Jalankan saat halaman siap
+// Jalankan saat halaman siap (hanya untuk judul)
 window.onload = () => {
     typeWriter(mainText, "typing-text", 40);
-    
-    // Beri sedikit jeda biar efek ngetik judul selesai dulu, baru lirik jalan
-    setTimeout(() => {
-        typeWriter(lyricsText, "lyrics-text", 30);
-    }, mainText.length * 40 + 500); 
 };
