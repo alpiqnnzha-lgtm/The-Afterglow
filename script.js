@@ -1,15 +1,14 @@
 const mainText = "Sometimes, memories are mirrors. One reflects the past, the other shows who you're becoming.";
 const letterContent = "This journey wasn't about the destination, but the echoes we left behind. Everything has its own timing. Stay brave.";
-const lyricsText = "Someday, I'll see you again. Maybe not in this time, maybe not in this world. But I know that one day, in another place, we'll meet again.";
+
+const lyricsWords = ["Someday,", "I'll", "see", "you", "again.", "Maybe", "not", "in", "this", "time,", "maybe", "not", "in", "this", "world.", "But", "I", "know", "that", "one", "day,", "in", "another", "place,", "we'll", "meet", "again."];
 
 // ── Typewriter ──
 function typeWriter(text, id, speed, callback) {
     const element = document.getElementById(id);
     if (!element) return;
-
     let i = 0;
     element.innerHTML = "";
-
     function typing() {
         if (i < text.length) {
             element.innerHTML += text.charAt(i);
@@ -20,6 +19,37 @@ function typeWriter(text, id, speed, callback) {
         }
     }
     typing();
+}
+
+// ── Someday fade-in per kata ──
+let wordTimer = null;
+
+function showSomedayWords() {
+    const el = document.getElementById('lyrics-text');
+    if (!el) return;
+    el.innerHTML = "";
+    el.style.opacity = "1";
+
+    let idx = 0;
+    function nextWord() {
+        if (idx >= lyricsWords.length) return;
+        const span = document.createElement('span');
+        span.textContent = lyricsWords[idx] + " ";
+        span.style.opacity = "0";
+        span.style.transition = "opacity 1.2s ease";
+        span.style.display = "inline";
+        el.appendChild(span);
+        setTimeout(() => span.style.opacity = "1", 50);
+        idx++;
+        wordTimer = setTimeout(nextWord, 600);
+    }
+    nextWord();
+}
+
+function hideSomedayWords() {
+    if (wordTimer) clearTimeout(wordTimer);
+    const el = document.getElementById('lyrics-text');
+    if (el) el.innerHTML = "";
 }
 
 // ── Lyric lines fade-in per baris ──
@@ -36,8 +66,8 @@ function showLyricLines() {
         idx++;
         lyricTimer = setTimeout(next, 5500);
     }
-    // langsung mulai pas tombol diklik
-    next();
+    // muncul setelah Someday selesai (~17 detik)
+    lyricTimer = setTimeout(next, lyricsWords.length * 600 + 1500);
 }
 
 function hideLyricLines() {
@@ -61,14 +91,12 @@ function toggleAudio() {
 
         btn.textContent = "Pause Memory";
 
-        // About You fade-in duluan
+        // Someday fade-in per kata duluan
+        showSomedayWords();
+
+        // do you think muncul setelah Someday selesai
         if (subLyrics) subLyrics.classList.add('show');
         showLyricLines();
-
-        // Someday... mulai 2 detik kemudian
-        setTimeout(() => {
-            typeWriter(lyricsText, "lyrics-text", 120);
-        }, 2000);
 
     } else {
         audio.pause();
@@ -76,7 +104,7 @@ function toggleAudio() {
 
         btn.textContent = "Play Memory";
 
-        if (lyricsEl) lyricsEl.innerHTML = "";
+        hideSomedayWords();
         if (subLyrics) subLyrics.classList.remove('show');
         hideLyricLines();
     }
@@ -86,9 +114,7 @@ function toggleAudio() {
 function toggleLetter() {
     const modal = document.getElementById('letter-modal');
     if (!modal) return;
-
     modal.classList.toggle('hidden');
-
     if (!modal.classList.contains('hidden')) {
         typeWriter(letterContent, "letter-text", 30);
     }
