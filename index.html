@@ -13,21 +13,13 @@
     </video>
 
     <div class="container">
-        <!-- Judul Utama -->
+        <!-- 1. Judul & Lirik Utama -->
         <h1 id="typing-text" class="fade-in">Digital Shrine</h1>
-
-        <!-- Lirik Utama (Tebel) & Tombol Play -->
-        <div class="audio-lirik-section">
-            <div class="lyrics-container">
-                <p id="lyrics-text" class="bold-lyrics"></p>
-            </div>
-            <button onclick="toggleAudio()" class="neon-btn" id="play-btn">Play Memory</button>
-            <audio id="audio" loop preload="auto">
-                <source src="song.mp3" type="audio/mpeg">
-            </audio>
+        <div class="lyrics-container">
+            <p id="lyrics-text" class="bold-lyrics"></p>
         </div>
 
-        <!-- Galeri Foto -->
+        <!-- 2. Galeri Foto -->
         <div class="gallery-grid">
             <img src="images/mantan1.jpg" class="card">
             <img src="images/mantan2.jpg" class="card">
@@ -37,34 +29,36 @@
             <img src="images/songmin2.jpg" class="card idol">
         </div>
 
-        <!-- Lirik About You (Pelengkap di bawah) -->
+        <!-- 3. Lirik About You (Statis/Fade-in) -->
         <div class="sub-lyrics-section">
-            <div class="divider"></div>
-            <p>"About you... you are the memory that refuses to fade."</p>
+            <p>"About you... you are the memory that refuses to fade. The echo that lingers in the quietest corners of my mind. Even in the silence, your name remains a song I can't forget."</p>
         </div>
 
-        <!-- Bagian Narasi & Tombol Interaksi di bawah -->
+        <!-- 4. Tombol Play (Dibawah About You) -->
+        <div class="audio-lirik-section">
+            <button onclick="toggleAudio()" class="neon-btn" id="play-btn">Play Memory</button>
+            <audio id="audio" loop preload="auto">
+                <source src="song.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- 5. Bagian Footer (Paling Dasar) -->
         <div class="bottom-section">
             <div class="narration-section">
                 <p>Sometimes, we hold onto things not because they're still there, but because we're afraid of the silence that follows when we finally let go.</p>
-                <p>This digital shrine is a space to honor what was, accept what is, and open the door for what will be.</p>
             </div>
-
             <div class="controls">
                 <button id="secret-btn" class="neon-btn">Unveil Secret</button>
                 <button onclick="toggleLetter()" class="neon-btn">Open The Letter</button>
             </div>
-
-            <p id="easter-egg" class="hidden">Hidden Truth: Everything ends so something better can begin. You're doing great.</p>
         </div>
     </div>
 
-    <!-- Modal Surat -->
     <div id="letter-modal" class="hidden">
         <div class="letter-content">
             <h2>A Note for You</h2>
             <p id="letter-text"></p>
-            <button onclick="toggleLetter()" class="neon-btn" style="margin-top:20px">Close</button>
+            <button onclick="toggleLetter()" class="neon-btn">Close</button>
         </div>
     </div>
 
