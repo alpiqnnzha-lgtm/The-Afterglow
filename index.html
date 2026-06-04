@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Shrine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,43 +16,71 @@
     </video>
 
     <div class="container">
-    <h1 id="typing-text" class="fade-in">Digital Shrine</h1>
 
-    <div class="gallery-grid">
-        <img src="images/mantan1.jpg" class="card">
-        <img src="images/mantan2.jpg" class="card">
-        <img src="images/mantan3.jpg" class="card">
-        <img src="images/mantan4.jpg" class="card">
-        <img src="images/songmin1.jpg" class="card idol">
-        <img src="images/songmin2.jpg" class="card idol">
-    </div>
+        <h1 id="typing-text" class="fade-in"></h1>
 
-    <div class="bottom-content-section">
-        <div class="lyrics-container">
-            <p id="lyrics-text" class="bold-lyrics"></p>
+        <div class="gallery-grid">
+            <img src="images/mantan1.jpg" class="card">
+            <img src="images/mantan2.jpg" class="card">
+            <img src="images/mantan3.jpg" class="card">
+            <img src="images/mantan4.jpg" class="card">
+            <img src="images/songmin1.jpg" class="card idol">
+            <img src="images/songmin2.jpg" class="card idol">
         </div>
 
-        <div class="sub-lyrics-section" id="about-you-section">
-            <div class="divider"></div>
-            <p id="about-you-text">"About you... you are the memory that refuses to fade. The echo that lingers in the quietest corners of my mind. Even in the silence, your name remains a song I can't forget."</p>
+        <div class="bottom-content-section">
+
+            <!-- Lirik utama typewriter -->
+            <div class="lyrics-container">
+                <p id="lyrics-text" class="bold-lyrics"></p>
+            </div>
+
+            <!-- About You - fade in per baris -->
+            <div class="sub-lyrics-section" id="about-you-section">
+                <div class="divider"></div>
+                <span class="lyric-line">"About you… you are the memory</span>
+                <span class="lyric-line">that refuses to fade.</span>
+                <span class="lyric-line">The echo that lingers</span>
+                <span class="lyric-line">in the quietest corners of my mind.</span>
+                <span class="lyric-line">Even in the silence,</span>
+                <span class="lyric-line">your name remains a song</span>
+                <span class="lyric-line">I can't forget."</span>
+            </div>
+
+            <!-- Audio player -->
+            <div class="audio-controls">
+                <!-- About You -->
+                <div class="audio-item">
+                    <span class="audio-label">🎵 About You</span>
+                    <button onclick="toggleMainAudio()" class="neon-btn" id="play-btn">Play</button>
+                </div>
+                <!-- Backsound -->
+                <div class="audio-item">
+                    <span class="audio-label">🌊 Backsound</span>
+                    <button onclick="toggleBacksound()" class="neon-btn" id="back-btn">Play</button>
+                </div>
+            </div>
+
+            <!-- Audio elements -->
+            <audio id="audio" loop preload="auto">
+                <source src="song.mp3" type="audio/mpeg">
+            </audio>
+            <audio id="backsound" loop preload="auto">
+                <source src="backsound.mp3" type="audio/mpeg">
+            </audio>
+
         </div>
 
-        <button onclick="toggleAudio()" class="neon-btn" id="play-btn">Play Memory</button>
-        <audio id="audio" loop preload="auto">
-            <source src="song.mp3" type="audio/mpeg">
-        </audio>
-    </div>
-
-    <div class="bottom-section">
-        <div class="controls">
-            <button id="secret-btn" class="neon-btn">Unveil Secret</button>
-            <button onclick="toggleLetter()" class="neon-btn">Open The Letter</button>
+        <div class="bottom-section">
+            <div class="controls">
+                <button id="secret-btn" class="neon-btn">Unveil Secret</button>
+                <button onclick="toggleLetter()" class="neon-btn">Open The Letter</button>
+            </div>
         </div>
+
     </div>
-</div>
 
-
-
+    <!-- Letter Modal -->
     <div id="letter-modal" class="hidden">
         <div class="letter-content">
             <h2>A Note for You</h2>
