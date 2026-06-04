@@ -3,16 +3,20 @@ const letterContent = "This journey wasn't about the destination, but the echoes
 const lyricsText = "Someday, I'll see you again. Maybe not in this time, maybe not in this world. But I know that one day, in another place, we'll meet again.";
 
 function typeWriter(text, id, speed, callback) {
-    let i = 0;
     const element = document.getElementById(id);
     if (!element) return;
+    
+    let i = 0;
     element.innerHTML = "";
+    
     function typing() {
         if (i < text.length) {
             element.innerHTML += text.charAt(i);
             i++;
             setTimeout(typing, speed);
-        } else if (callback) callback();
+        } else if (callback) {
+            callback();
+        }
     }
     typing();
 }
@@ -20,8 +24,10 @@ function typeWriter(text, id, speed, callback) {
 function toggleAudio() {
     const audio = document.getElementById('audio');
     const btn = document.getElementById('play-btn');
+    if (!audio || !btn) return;
+
     if (audio.paused) {
-        audio.play().catch(e => console.log("Audio play blocked:", e));
+        audio.play().catch(e => console.error("Audio playback failed:", e));
         btn.innerHTML = "Pause Memory";
     } else {
         audio.pause();
@@ -31,20 +37,31 @@ function toggleAudio() {
 
 function toggleLetter() {
     const modal = document.getElementById('letter-modal');
+    if (!modal) return;
+    
     modal.classList.toggle('hidden');
+    
+    // Ketik surat hanya saat modal dibuka
     if (!modal.classList.contains('hidden')) {
         typeWriter(letterContent, "letter-text", 30);
     }
 }
 
-document.getElementById('secret-btn').addEventListener('click', () => {
-    const egg = document.getElementById('easter-egg');
-    if(egg) egg.classList.remove('hidden');
-});
+// Event listener untuk rahasia
+const secretBtn = document.getElementById('secret-btn');
+if (secretBtn) {
+    secretBtn.addEventListener('click', () => {
+        const egg = document.getElementById('easter-egg');
+        if (egg) egg.classList.remove('hidden');
+    });
+}
 
-// Jalankan saat load
+// Jalankan saat halaman siap
 window.onload = () => {
     typeWriter(mainText, "typing-text", 40);
-    // Tambahkan baris ini biar lirik juga ngetik otomatis pas web dibuka
-    typeWriter(lyricsText, "lyrics-text", 30);
+    
+    // Beri sedikit jeda biar efek ngetik judul selesai dulu, baru lirik jalan
+    setTimeout(() => {
+        typeWriter(lyricsText, "lyrics-text", 30);
+    }, mainText.length * 40 + 500); 
 };
