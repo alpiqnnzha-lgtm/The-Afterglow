@@ -21,24 +21,29 @@ function typeWriter(text, id, speed, callback) {
     typing();
 }
 
-// ── Someday fade-in per kata ──
+// ── Someday fade-in per kata (no geser, pure opacity) ──
 let wordTimer = null;
-let wordAnimFrames = [];
 
 function showSomedayWords() {
     const el = document.getElementById('lyrics-text');
     if (!el) return;
+
+    // render semua kata dulu, opacity 0
     el.innerHTML = "";
-
-    let idx = 0;
-
-    function nextWord() {
-        if (idx >= lyricsWords.length) return;
+    lyricsWords.forEach((word, i) => {
         const span = document.createElement('span');
-        span.textContent = lyricsWords[idx] + " ";
+        span.textContent = word + " ";
         span.style.cssText = "opacity:0; transition: opacity 1.2s ease; display:inline;";
+        span.dataset.idx = i;
         el.appendChild(span);
-        setTimeout(() => { span.style.opacity = "1"; }, 50);
+    });
+
+    // fade in satu per satu
+    const spans = el.querySelectorAll('span');
+    let idx = 0;
+    function nextWord() {
+        if (idx >= spans.length) return;
+        spans[idx].style.opacity = "1";
         idx++;
         wordTimer = setTimeout(nextWord, 600);
     }
@@ -46,10 +51,7 @@ function showSomedayWords() {
 }
 
 function hideSomedayWords() {
-    if (wordTimer) {
-        clearTimeout(wordTimer);
-        wordTimer = null;
-    }
+    if (wordTimer) { clearTimeout(wordTimer); wordTimer = null; }
     const el = document.getElementById('lyrics-text');
     if (el) el.innerHTML = "";
 }
@@ -68,15 +70,12 @@ function showLyricLines() {
         idx++;
         lyricTimer = setTimeout(next, 5500);
     }
-    // muncul setelah Someday selesai
-    lyricTimer = setTimeout(next, lyricsWords.length * 600 + 1500);
+    // do you think duluan, langsung pas play
+    next();
 }
 
 function hideLyricLines() {
-    if (lyricTimer) {
-        clearTimeout(lyricTimer);
-        lyricTimer = null;
-    }
+    if (lyricTimer) { clearTimeout(lyricTimer); lyricTimer = null; }
     document.querySelectorAll('.lyric-line').forEach(l => l.classList.remove('visible'));
 }
 
@@ -94,9 +93,14 @@ function toggleAudio() {
         if (backsound) backsound.play().catch(e => console.error("Backsound error:", e));
         btn.textContent = "Pause Memory";
 
-        showSomedayWords();
+        // do you think duluan
         if (subLyrics) subLyrics.classList.add('show');
         showLyricLines();
+
+        // Someday muncul setelah do you think ke-3 selesai (~2 detik setelah baris terakhir)
+        setTimeout(() => {
+            showSomedayWords();
+        }, 5500 * 3 + 2000);
 
     } else {
         audio.pause();
