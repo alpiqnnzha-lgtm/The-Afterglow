@@ -1,115 +1,206 @@
-/* Pengaturan Dasar */
-body, html { 
-    margin: 0; padding: 0; height: 100%; 
-    font-family: 'Courier New', monospace; 
-    color: white; overflow-x: hidden; 
+/* ── Reset & Base ── */
+body, html {
+    margin: 0; padding: 0; height: 100%;
+    font-family: 'Dancing Script', cursive;
+    color: white; overflow-x: hidden;
 }
 
-/* Background Video */
-.bg-video { 
-    position: fixed; right: 0; bottom: 0; 
-    min-width: 100%; min-height: 100%; 
-    z-index: -1; object-fit: cover; 
-    object-position: right center; filter: brightness(0.7); 
+/* ── Background Video ── */
+.bg-video {
+    position: fixed; right: 0; bottom: 0;
+    min-width: 100%; min-height: 100%;
+    z-index: -1; object-fit: cover;
+    object-position: right center; filter: brightness(0.6);
 }
 
-.container { 
-    display: flex; flex-direction: column; 
-    align-items: center; padding: 20px; min-height: 100vh; 
+/* ── Container ── */
+.container {
+    display: flex; flex-direction: column;
+    align-items: center; padding: 20px; min-height: 100vh;
 }
 
-#typing-text { 
-    font-size: 1.2rem; color: #00f2ff; 
-    text-shadow: 0 0 10px #00f2ff; 
-    min-height: 80px; text-align: center; 
+/* ── Judul / Typing Text ── */
+#typing-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem; font-weight: 700;
+    color: #f4a7b9;
+    text-shadow: 0 0 16px rgba(244,167,185,0.6);
+    min-height: 80px; text-align: center;
+    letter-spacing: 0.02em;
 }
 
-/* Lirik Utama (Tebel/Bold) */
-.bold-lyrics {
-    font-size: 1.4rem; font-weight: 800;
-    color: #00f2ff; text-shadow: 0 0 10px #00f2ff;
-    font-family: 'Courier New', monospace;
-    margin-bottom: 10px; min-height: 60px;
+/* ── Gallery ── */
+.gallery-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 15px; margin: 20px 0; width: 100%; max-width: 400px;
 }
 
-/* Lirik Pelengkap (About You) - Muncul saat tombol di-klik */
-.sub-lyrics-section {
-    margin: 30px auto; 
-    text-align: center; width: 80%;
-    font-size: 1rem; color: #e0e0e0; 
-    font-family: 'Georgia', serif; 
-    font-style: italic; 
-    opacity: 0; /* Awalnya tersembunyi */
-    transition: opacity 1s ease-in-out; /* Transisi halus */
+.card {
+    width: 100%; height: 120px; object-fit: cover;
+    border-radius: 12px; filter: grayscale(40%); transition: 0.5s;
+    border: 1.5px solid rgba(244,167,185,0.15);
 }
 
-/* Class untuk fade-in via JS */
-.sub-lyrics-section.show {
-    opacity: 1;
+.card.idol {
+    border: 2px solid #f4a7b9;
+    box-shadow: 0 0 14px rgba(244,167,185,0.45);
 }
 
-.divider {
-    width: 50px; height: 1px;
-    background: #ff00ff; margin: 0 auto 20px auto;
-    box-shadow: 0 0 10px #ff00ff;
-}
-
-/* Galeri & Kartu */
-.gallery-grid { 
-    display: grid; grid-template-columns: repeat(2, 1fr); 
-    gap: 15px; margin: 20px 0; width: 100%; max-width: 400px; 
-}
-
-.card { 
-    width: 100%; height: 120px; object-fit: cover; 
-    border-radius: 10px; filter: grayscale(50%); transition: 0.5s; 
-}
-
-.card.idol { border: 2px solid #00f2ff; box-shadow: 0 0 10px #00f2ff; }
 .card:hover { filter: grayscale(0%); transform: scale(1.05); }
 
-/* Narasi & Kontrol */
-.bottom-section { margin-top: 30px; text-align: center; width: 100%; }
-
-.narration-section {
-    margin: 30px auto; padding: 20px; max-width: 500px;
-    text-align: center; color: #cccccc; font-size: 1rem;
-    line-height: 1.6; border-top: 1px solid #333; border-bottom: 1px solid #333;
+/* ── Bottom Content ── */
+.bottom-content-section {
+    width: 100%; max-width: 480px;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 16px;
 }
 
-.controls { 
-    display: flex; justify-content: center; 
-    gap: 10px; margin-top: 20px; 
+/* ── Lirik Utama ── */
+.lyrics-container { width: 100%; text-align: center; }
+
+.bold-lyrics {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.45rem; font-weight: 700;
+    color: #f4a7b9;
+    text-shadow: 0 0 14px rgba(244,167,185,0.5);
+    margin-bottom: 10px; min-height: 60px;
+    line-height: 1.6; letter-spacing: 0.01em;
 }
 
-.neon-btn { 
-    background: transparent; border: 1px solid #ff00ff; 
-    color: #ff00ff; padding: 10px 15px; cursor: pointer; 
-    transition: 0.3s; 
+/* ── Sub Lirik About You ── */
+.sub-lyrics-section {
+    margin: 10px auto;
+    text-align: center; width: 85%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
 }
 
-.neon-btn:hover { 
-    background: #ff00ff; color: white; box-shadow: 0 0 15px #ff00ff; 
+.sub-lyrics-section.show {
+    opacity: 1;
+    pointer-events: auto;
 }
 
-/* Modal */
-#letter-modal { 
-    position: fixed; top:0; left:0; width: 100%; height: 100%; 
-    background: rgba(0,0,0,0.95); display: flex; 
-    justify-content: center; align-items: center; z-index: 1000; 
+/* Per-baris fade in */
+.lyric-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: #fce4ec;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.85s ease, transform 0.85s ease;
+    display: block;
+    letter-spacing: 0.02em;
 }
 
-.letter-content { 
-    background: #111; padding: 25px; border: 1px solid #00f2ff; 
-    border-radius: 20px; width: 80%; text-align: center; 
+.lyric-line.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
+/* ── Divider ── */
+.divider {
+    width: 50px; height: 1px;
+    background: linear-gradient(to right, transparent, #e57373, transparent);
+    margin: 0 auto 20px auto;
+    box-shadow: 0 0 8px rgba(229,115,115,0.5);
+}
+
+/* ── Audio Controls ── */
+.audio-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+    margin-top: 8px;
+}
+
+.audio-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 18px;
+    border-radius: 12px;
+    background: rgba(244,167,185,0.07);
+    border: 1px solid rgba(244,167,185,0.2);
+}
+
+.audio-label {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1rem;
+    color: #f8bbd0;
+    letter-spacing: 0.03em;
+}
+
+/* ── Buttons ── */
+.neon-btn {
+    background: transparent;
+    border: 1.5px solid #f4a7b9;
+    color: #f4a7b9;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 10px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.neon-btn:hover {
+    background: rgba(244,167,185,0.15);
+    color: white;
+    box-shadow: 0 0 18px rgba(244,167,185,0.45);
+    transform: translateY(-1px);
+}
+
+/* ── Bottom Section ── */
+.bottom-section { margin-top: 20px; text-align: center; width: 100%; }
+
+.controls {
+    display: flex; justify-content: center;
+    gap: 12px; margin-top: 20px;
+}
+
+/* ── Letter Modal ── */
+#letter-modal {
+    position: fixed; top:0; left:0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.92); display: flex;
+    justify-content: center; align-items: center; z-index: 1000;
+}
+
+.letter-content {
+    background: #110a0f; padding: 28px;
+    border: 1px solid rgba(244,167,185,0.4);
+    border-radius: 20px; width: 82%; text-align: center;
+    box-shadow: 0 0 30px rgba(244,167,185,0.15);
+}
+
+.letter-content h2 {
+    font-family: 'Dancing Script', cursive;
+    color: #f4a7b9;
+    font-size: 1.6rem;
+    margin-bottom: 16px;
+}
+
+.letter-content p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #fce4ec;
+}
+
+/* ── Utilities ── */
 .hidden { display: none !important; }
+
 .fade-in { animation: fadeIn 2s ease-in-out; }
 
-/* Animasi */
-@keyframes fadeIn { 
-    0% { opacity: 0; } 
-    100% { opacity: 1; } 
-}
-
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+    }
