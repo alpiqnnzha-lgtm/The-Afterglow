@@ -23,7 +23,6 @@ function typeWriter(text, id, speed, callback) {
 }
 
 // ── Lyric lines fade-in per baris ──
-// 3 baris, total ~17 detik → tiap baris muncul tiap ~5500ms
 let lyricTimer = null;
 
 function showLyricLines() {
@@ -35,10 +34,10 @@ function showLyricLines() {
         if (idx >= lines.length) return;
         lines[idx].classList.add('visible');
         idx++;
-        lyricTimer = setTimeout(next, 5500); // ~5.5 detik per baris → 3 baris = ~16.5 detik
+        lyricTimer = setTimeout(next, 5500);
     }
-    // mulai setelah lirik utama selesai ngetik
-    lyricTimer = setTimeout(next, lyricsText.length * 120 + 400);
+    // langsung mulai pas tombol diklik
+    next();
 }
 
 function hideLyricLines() {
@@ -46,7 +45,7 @@ function hideLyricLines() {
     document.querySelectorAll('.lyric-line').forEach(l => l.classList.remove('visible'));
 }
 
-// ── Toggle Audio (1 tombol, 2 audio jalan bersamaan) ──
+// ── Toggle Audio ──
 function toggleAudio() {
     const audio = document.getElementById('audio');
     const backsound = document.getElementById('backsound');
@@ -62,12 +61,14 @@ function toggleAudio() {
 
         btn.textContent = "Pause Memory";
 
-        // Lirik utama typewriter
-        typeWriter(lyricsText, "lyrics-text", 120);
-
-        // About You fade-in per baris
+        // About You fade-in duluan
         if (subLyrics) subLyrics.classList.add('show');
         showLyricLines();
+
+        // Someday... mulai 2 detik kemudian
+        setTimeout(() => {
+            typeWriter(lyricsText, "lyrics-text", 120);
+        }, 2000);
 
     } else {
         audio.pause();
