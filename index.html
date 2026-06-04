@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Shrine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <video autoplay muted loop playsinline class="bg-video">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <h1 id="typing-text"></h1>
+
+        <div class="gallery-grid">
+            <img src="mantan1.jpg" class="card">
+            <img src="mantan2.jpg" class="card">
+            <img src="mantan3.jpg" class="card">
+            <img src="mantan4.jpg" class="card">
+            <img src="songmin1.jpg" class="card idol">
+            <img src="songmin2.jpg" class="card idol">
+        </div>
+
+        <!-- Bagian Audio & Lirik yang Menyatu -->
+        <div class="audio-lirik-section">
+            <button onclick="toggleAudio()" class="neon-btn" id="play-btn">Play Memory</button>
+            <audio id="audio" loop>
+                <source src="song.mp3" type="audio/mpeg">
+            </audio>
+
+            <div class="lyrics-container">
+                <p id="lyrics-text" class="fade-in">
+                    "Someday, I'll see you again.<br>
+                    Maybe not in this time, maybe not in this world.<br>
+                    But I know that one day, in another place, we'll meet again."
+                </p>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="secret-btn" class="neon-btn">Unveil Secret</button>
+            <button onclick="toggleLetter()" class="neon-btn">Open The Letter</button>
+        </div>
+
+        <p id="easter-egg" class="hidden">Hidden Truth: Everything ends so something better can begin. You're doing great.</p>
+    </div>
+
+    <div id="letter-modal" class="hidden">
+        <div class="letter-content">
+            <h2>A Note for You</h2>
+            <p id="letter-text"></p>
+            <button onclick="toggleLetter()" class="neon-btn" style="margin-top:20px">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+ 
