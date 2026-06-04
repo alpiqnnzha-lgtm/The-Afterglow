@@ -97,10 +97,10 @@ function toggleAudio() {
         if (subLyrics) subLyrics.classList.add('show');
         showLyricLines();
 
-        // Someday muncul setelah do you think ke-3 selesai (~2 detik setelah baris terakhir)
+        // Someday muncul 1.8 detik setelah play
         setTimeout(() => {
             showSomedayWords();
-        }, 5500 * 3 + 2000);
+        }, 1800);
 
     } else {
         audio.pause();
