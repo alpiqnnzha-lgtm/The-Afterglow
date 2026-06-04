@@ -22,48 +22,40 @@ function typeWriter(text, id, speed, callback) {
 
 // ── Someday fade-in per kata ──
 let wordTimer = null;
+let somedayTimeout = null;
 
 function showSomedayWords() {
     const el = document.getElementById('lyrics-text');
     if (!el) return;
 
-    // container fade-in dulu pelan
-    el.style.opacity = "0";
-    el.style.transition = "opacity 1.5s ease";
     el.innerHTML = "";
+    el.style.cssText = "opacity:0; transition: opacity 0.8s ease;";
 
     lyricsWords.forEach((word) => {
         const span = document.createElement('span');
         span.textContent = word + " ";
-        span.style.cssText = "opacity:0; transition: opacity 1.2s ease; display:inline;";
+        span.style.cssText = "opacity:0; transition: opacity 0.6s ease; display:inline;";
         el.appendChild(span);
     });
 
-    // container fade in dulu
-    setTimeout(() => {
-        el.style.opacity = "1";
-    }, 50);
+    setTimeout(() => { el.style.opacity = "1"; }, 50);
 
-    // baru kata-kata muncul satu per satu setelah container keliatan
     const spans = el.querySelectorAll('span');
     let idx = 0;
     function nextWord() {
         if (idx >= spans.length) return;
         spans[idx].style.opacity = "1";
         idx++;
-        wordTimer = setTimeout(nextWord, 600);
+        wordTimer = setTimeout(nextWord, 300);
     }
-    setTimeout(nextWord, 800);
+    setTimeout(nextWord, 500);
 }
 
 function hideSomedayWords() {
     if (wordTimer) { clearTimeout(wordTimer); wordTimer = null; }
+    if (somedayTimeout) { clearTimeout(somedayTimeout); somedayTimeout = null; }
     const el = document.getElementById('lyrics-text');
-    if (el) {
-        el.style.transition = "none";
-        el.style.opacity = "0";
-        el.innerHTML = "";
-    }
+    if (el) { el.style.cssText = "opacity:0; transition:none;"; el.innerHTML = ""; }
 }
 
 // ── do you think fade-in per baris ──
@@ -72,7 +64,6 @@ let lyricTimer = null;
 function showLyricLines() {
     const lines = document.querySelectorAll('.lyric-line');
     lines.forEach(l => l.classList.remove('visible'));
-
     let idx = 0;
     function next() {
         if (idx >= lines.length) return;
@@ -98,14 +89,16 @@ function toggleAudio() {
     if (!audio || !btn) return;
 
     if (audio.paused) {
-        audio.play().catch(e => console.error("Audio error:", e));
-        if (backsound) backsound.play().catch(e => console.error("Backsound error:", e));
-        btn.textContent = "Pause Memory";
-
-        // reset dulu biar bersih
+        // reset semua dulu
         hideSomedayWords();
         hideLyricLines();
         if (subLyrics) subLyrics.classList.remove('show');
+
+        audio.currentTime = 0;
+        if (backsound) backsound.currentTime = 0;
+        audio.play().catch(e => console.error("Audio error:", e));
+        if (backsound) backsound.play().catch(e => console.error("Backsound error:", e));
+        btn.textContent = "Pause Memory";
 
         // do you think duluan
         setTimeout(() => {
@@ -113,8 +106,8 @@ function toggleAudio() {
             showLyricLines();
         }, 100);
 
-        // Someday 1.8 detik kemudian, fade pelan
-        setTimeout(() => {
+        // Someday 1.8 detik kemudian
+        somedayTimeout = setTimeout(() => {
             showSomedayWords();
         }, 1800);
 
