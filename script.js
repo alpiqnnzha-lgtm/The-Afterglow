@@ -27,9 +27,7 @@ let lyricTimer = null;
 
 function showLyricLines() {
     const lines = document.querySelectorAll('.lyric-line');
-    lines.forEach(l => {
-        l.classList.remove('visible');
-    });
+    lines.forEach(l => l.classList.remove('visible'));
 
     let idx = 0;
     function next() {
@@ -38,7 +36,7 @@ function showLyricLines() {
         idx++;
         lyricTimer = setTimeout(next, 900);
     }
-    // mulai setelah lirik utama selesai ngetik (~2 detik)
+    // mulai setelah lirik utama selesai ngetik
     lyricTimer = setTimeout(next, lyricsText.length * 120 + 400);
 }
 
@@ -47,50 +45,41 @@ function hideLyricLines() {
     document.querySelectorAll('.lyric-line').forEach(l => l.classList.remove('visible'));
 }
 
-// ── Main Audio (About You) ──
-function toggleMainAudio() {
+// ── Toggle Audio (1 tombol, 2 audio jalan bersamaan) ──
+function toggleAudio() {
     const audio = document.getElementById('audio');
+    const backsound = document.getElementById('backsound');
     const btn = document.getElementById('play-btn');
     const subLyrics = document.getElementById('about-you-section');
+    const lyricsEl = document.getElementById('lyrics-text');
 
     if (!audio || !btn) return;
 
     if (audio.paused) {
+        // Play keduanya sekaligus
         audio.play().catch(e => console.error("Audio error:", e));
-        btn.textContent = "Pause";
+        if (backsound) backsound.play().catch(e => console.error("Backsound error:", e));
+
+        btn.textContent = "Pause Memory";
 
         // Lirik utama typewriter
         typeWriter(lyricsText, "lyrics-text", 120);
 
-        // Tampilkan section About You dulu, lalu fade per baris
+        // About You fade-in per baris
         if (subLyrics) subLyrics.classList.add('show');
         showLyricLines();
 
     } else {
+        // Pause keduanya
         audio.pause();
-        btn.textContent = "Play";
+        if (backsound) backsound.pause();
+
+        btn.textContent = "Play Memory";
 
         // Reset lirik
-        const lyricsEl = document.getElementById('lyrics-text');
         if (lyricsEl) lyricsEl.innerHTML = "";
         if (subLyrics) subLyrics.classList.remove('show');
         hideLyricLines();
-    }
-}
-
-// ── Backsound ──
-function toggleBacksound() {
-    const bs = document.getElementById('backsound');
-    const btn = document.getElementById('back-btn');
-
-    if (!bs || !btn) return;
-
-    if (bs.paused) {
-        bs.play().catch(e => console.error("Backsound error:", e));
-        btn.textContent = "Pause";
-    } else {
-        bs.pause();
-        btn.textContent = "Play";
     }
 }
 
