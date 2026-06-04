@@ -32,7 +32,7 @@ body, html {
     margin-bottom: 10px; min-height: 60px;
 }
 
-/* Lirik Pelengkap (Sesuai request: muncul pas di-klik) */
+/* Lirik Pelengkap (About You) - Muncul saat tombol di-klik */
 .sub-lyrics-section {
     margin: 30px auto; 
     text-align: center; width: 80%;
@@ -43,7 +43,7 @@ body, html {
     transition: opacity 1s ease-in-out; /* Transisi halus */
 }
 
-/* Class ini yang bakal di-add/remove sama JS */
+/* Class untuk fade-in via JS */
 .sub-lyrics-section.show {
     opacity: 1;
 }
@@ -107,6 +107,9 @@ body, html {
 .hidden { display: none !important; }
 .fade-in { animation: fadeIn 2s ease-in-out; }
 
+/* Animasi */
 @keyframes fadeIn { 
-    0% { opacity: 0; } 100% { opacity: 1; } 
+    0% { opacity: 0; } 
+    100% { opacity: 1; } 
 }
+
