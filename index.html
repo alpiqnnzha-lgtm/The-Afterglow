@@ -13,11 +13,13 @@
     </video>
 
     <div class="container">
+        <!-- Judul Utama -->
         <h1 id="typing-text" class="fade-in">Digital Shrine</h1>
 
+        <!-- Lirik Utama (Tebel) & Tombol Play -->
         <div class="audio-lirik-section">
             <div class="lyrics-container">
-                <p id="lyrics-text"></p>
+                <p id="lyrics-text" class="bold-lyrics"></p>
             </div>
             <button onclick="toggleAudio()" class="neon-btn" id="play-btn">Play Memory</button>
             <audio id="audio" loop preload="auto">
@@ -25,6 +27,7 @@
             </audio>
         </div>
 
+        <!-- Galeri Foto -->
         <div class="gallery-grid">
             <img src="images/mantan1.jpg" class="card">
             <img src="images/mantan2.jpg" class="card">
@@ -34,19 +37,29 @@
             <img src="images/songmin2.jpg" class="card idol">
         </div>
 
-        <div class="narration-section">
-            <p>Sometimes, we hold onto things not because they're still there, but because we're afraid of the silence that follows when we finally let go.</p>
-            <p>This digital shrine is a space to honor what was, accept what is, and open the door for what will be.</p>
+        <!-- Lirik About You (Pelengkap di bawah) -->
+        <div class="sub-lyrics-section">
+            <div class="divider"></div>
+            <p>"About you... you are the memory that refuses to fade."</p>
         </div>
 
-        <div class="controls">
-            <button id="secret-btn" class="neon-btn">Unveil Secret</button>
-            <button onclick="toggleLetter()" class="neon-btn">Open The Letter</button>
-        </div>
+        <!-- Bagian Narasi & Tombol Interaksi di bawah -->
+        <div class="bottom-section">
+            <div class="narration-section">
+                <p>Sometimes, we hold onto things not because they're still there, but because we're afraid of the silence that follows when we finally let go.</p>
+                <p>This digital shrine is a space to honor what was, accept what is, and open the door for what will be.</p>
+            </div>
 
-        <p id="easter-egg" class="hidden">Hidden Truth: Everything ends so something better can begin. You're doing great.</p>
+            <div class="controls">
+                <button id="secret-btn" class="neon-btn">Unveil Secret</button>
+                <button onclick="toggleLetter()" class="neon-btn">Open The Letter</button>
+            </div>
+
+            <p id="easter-egg" class="hidden">Hidden Truth: Everything ends so something better can begin. You're doing great.</p>
+        </div>
     </div>
 
+    <!-- Modal Surat -->
     <div id="letter-modal" class="hidden">
         <div class="letter-content">
             <h2>A Note for You</h2>
