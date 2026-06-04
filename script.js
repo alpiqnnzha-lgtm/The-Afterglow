@@ -3,7 +3,6 @@ const letterContent = "This journey wasn't about the destination, but the echoes
 
 const lyricsWords = ["Someday,", "I'll", "see", "you", "again.", "Maybe", "not", "in", "this", "time,", "maybe", "not", "in", "this", "world.", "But", "I", "know", "that", "one", "day,", "in", "another", "place,", "we'll", "meet", "again."];
 
-// ── Typewriter (cuma buat mainText & letter) ──
 function typeWriter(text, id, speed, callback) {
     const element = document.getElementById(id);
     if (!element) return;
@@ -21,24 +20,31 @@ function typeWriter(text, id, speed, callback) {
     typing();
 }
 
-// ── Someday fade-in per kata (no geser, pure opacity) ──
+// ── Someday fade-in per kata ──
 let wordTimer = null;
 
 function showSomedayWords() {
     const el = document.getElementById('lyrics-text');
     if (!el) return;
 
-    // render semua kata dulu, opacity 0
+    // container fade-in dulu pelan
+    el.style.opacity = "0";
+    el.style.transition = "opacity 1.5s ease";
     el.innerHTML = "";
-    lyricsWords.forEach((word, i) => {
+
+    lyricsWords.forEach((word) => {
         const span = document.createElement('span');
         span.textContent = word + " ";
         span.style.cssText = "opacity:0; transition: opacity 1.2s ease; display:inline;";
-        span.dataset.idx = i;
         el.appendChild(span);
     });
 
-    // fade in satu per satu
+    // container fade in dulu
+    setTimeout(() => {
+        el.style.opacity = "1";
+    }, 50);
+
+    // baru kata-kata muncul satu per satu setelah container keliatan
     const spans = el.querySelectorAll('span');
     let idx = 0;
     function nextWord() {
@@ -47,13 +53,17 @@ function showSomedayWords() {
         idx++;
         wordTimer = setTimeout(nextWord, 600);
     }
-    nextWord();
+    setTimeout(nextWord, 800);
 }
 
 function hideSomedayWords() {
     if (wordTimer) { clearTimeout(wordTimer); wordTimer = null; }
     const el = document.getElementById('lyrics-text');
-    if (el) el.innerHTML = "";
+    if (el) {
+        el.style.transition = "none";
+        el.style.opacity = "0";
+        el.innerHTML = "";
+    }
 }
 
 // ── do you think fade-in per baris ──
@@ -70,7 +80,6 @@ function showLyricLines() {
         idx++;
         lyricTimer = setTimeout(next, 5500);
     }
-    // do you think duluan, langsung pas play
     next();
 }
 
@@ -93,11 +102,18 @@ function toggleAudio() {
         if (backsound) backsound.play().catch(e => console.error("Backsound error:", e));
         btn.textContent = "Pause Memory";
 
-        // do you think duluan
-        if (subLyrics) subLyrics.classList.add('show');
-        showLyricLines();
+        // reset dulu biar bersih
+        hideSomedayWords();
+        hideLyricLines();
+        if (subLyrics) subLyrics.classList.remove('show');
 
-        // Someday muncul 1.8 detik setelah play
+        // do you think duluan
+        setTimeout(() => {
+            if (subLyrics) subLyrics.classList.add('show');
+            showLyricLines();
+        }, 100);
+
+        // Someday 1.8 detik kemudian, fade pelan
         setTimeout(() => {
             showSomedayWords();
         }, 1800);
