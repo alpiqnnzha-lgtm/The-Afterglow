@@ -13,7 +13,17 @@
     </video>
 
     <div class="container">
-        <h1 id="typing-text"></h1>
+        <h1 id="typing-text" class="fade-in">Digital Shrine</h1>
+
+        <div class="audio-lirik-section">
+            <div class="lyrics-container">
+                <p id="lyrics-text"></p>
+            </div>
+            <button onclick="toggleAudio()" class="neon-btn" id="play-btn">Play Memory</button>
+            <audio id="audio" loop preload="auto">
+                <source src="song.mp3" type="audio/mpeg">
+            </audio>
+        </div>
 
         <div class="gallery-grid">
             <img src="images/mantan1.jpg" class="card">
@@ -22,22 +32,6 @@
             <img src="images/mantan4.jpg" class="card">
             <img src="images/songmin1.jpg" class="card idol">
             <img src="images/songmin2.jpg" class="card idol">
-        </div>
-
-        <!-- Bagian Audio & Lirik yang Menyatu -->
-        <div class="audio-lirik-section">
-            <button onclick="toggleAudio()" class="neon-btn" id="play-btn">Play Memory</button>
-            <audio id="audio" loop>
-                <source src="song.mp3" type="audio/mpeg">
-            </audio>
-
-            <div class="lyrics-container">
-                <p id="lyrics-text" class="fade-in">
-                    "Someday, I'll see you again.<br>
-                    Maybe not in this time, maybe not in this world.<br>
-                    But I know that one day, in another place, we'll meet again."
-                </p>
-            </div>
         </div>
 
         <div class="controls">
