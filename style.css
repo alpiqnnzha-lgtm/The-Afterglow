@@ -13,7 +13,7 @@ body, html {
     left: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    z-index: -1 !important;
+    z-index: 0 !important;
     object-fit: cover !important;
     object-position: top center !important;
     filter: brightness(0.7) !important;
@@ -22,10 +22,11 @@ body, html {
     pointer-events: none !important;
 }
 
-/* ── Container ── */
 .container {
     display: flex; flex-direction: column;
     align-items: center; padding: 20px; min-height: 100vh;
+    position: relative;
+    z-index: 1;
 }
 
 /* ── Judul / Typing Text ── */
