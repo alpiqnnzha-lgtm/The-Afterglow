@@ -7,7 +7,6 @@ body, html {
 
 /* ── Background Video ── */
 .bg-video {
-.bg-video {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
@@ -149,7 +148,7 @@ body, html {
 }
 
 /* ── Letter Modal ── */
-#letter-modal {
+#letter-modal, #secret-modal {
     position: fixed; top:0; left:0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.92); display: flex;
     justify-content: center; align-items: center; z-index: 1000;
@@ -160,6 +159,8 @@ body, html {
     border: 1px solid rgba(244,167,185,0.4);
     border-radius: 20px; width: 82%; text-align: center;
     box-shadow: 0 0 30px rgba(244,167,185,0.15);
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .letter-content h2 {
@@ -185,4 +186,4 @@ body, html {
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
-    }
+}
