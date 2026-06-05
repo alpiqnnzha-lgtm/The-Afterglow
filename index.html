@@ -12,12 +12,10 @@
 <body>
 
     <video autoplay muted loop playsinline webkit-playsinline class="bg-video">
-        <source src="background.mp4" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2">
         <source src="background.mp4" type="video/mp4">
     </video>
 
     <div class="container">
-
         <h1 id="typing-text" class="fade-in"></h1>
 
         <div class="gallery-grid">
@@ -30,21 +28,17 @@
         </div>
 
         <div class="bottom-content-section">
-
-            <!-- Lirik Someday - fade in per kata -->
             <div class="lyrics-container">
                 <p id="lyrics-text" class="bold-lyrics"></p>
             </div>
 
-            <!-- About You - fade in per baris -->
             <div class="sub-lyrics-section" id="about-you-section">
                 <div class="divider"></div>
-                <span class="lyric-line">do you think I have forgotten?</span>
-                <span class="lyric-line">do you think I have forgotten?</span>
-                <span class="lyric-line">do you think I have forgotten about you?</span>
+                <div class="lyric-line">do you think I have forgotten?</div>
+                <div class="lyric-line">do you think I have forgotten?</div>
+                <div class="lyric-line">do you think I have forgotten about you?</div>
             </div>
 
-            <!-- Audio elements -->
             <audio id="audio" loop preload="auto">
                 <source src="song.mp3" type="audio/mpeg">
             </audio>
@@ -53,7 +47,6 @@
             </audio>
 
             <button onclick="toggleAudio()" class="neon-btn" id="play-btn">Play Memory</button>
-
         </div>
 
         <div class="bottom-section">
@@ -62,10 +55,8 @@
                 <button onclick="toggleLetter()" class="neon-btn">Open The Letter</button>
             </div>
         </div>
-
     </div>
 
-    <!-- Letter Modal -->
     <div id="letter-modal" class="hidden">
         <div class="letter-content">
             <h2>A Note for You</h2>
@@ -74,7 +65,6 @@
         </div>
     </div>
 
-    <!-- Secret Modal -->
     <div id="secret-modal" class="hidden">
         <div class="letter-content">
             <h2>Unveil Secret</h2>
