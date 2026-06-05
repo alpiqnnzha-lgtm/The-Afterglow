@@ -22,6 +22,7 @@ body, html {
     pointer-events: none !important;
 }
 
+/* ── Container ── */
 .container {
     display: flex; flex-direction: column;
     align-items: center; padding: 20px; min-height: 100vh;
@@ -31,12 +32,14 @@ body, html {
 
 /* ── Judul / Typing Text ── */
 #typing-text {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.5rem; font-weight: 700;
-    color: #f4a7b9;
-    text-shadow: 0 0 16px rgba(244,167,185,0.6);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 400;
+    font-style: italic;
+    color: #ffb3c6;
+    text-shadow: 0 0 20px rgba(255,179,198,0.7);
     min-height: 80px; text-align: center;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
+    line-height: 1.7;
 }
 
 /* ── Gallery ── */
