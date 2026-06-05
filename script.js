@@ -120,7 +120,7 @@ function toggleAudio() {
 
         somedayTimeout = setTimeout(() => {
             showSomedayWords();
-        }, 1800);
+        }, 1700);
 
     } else {
         audio.pause();
@@ -143,15 +143,14 @@ function toggleLetter() {
     }
 }
 
-// ── Unveil Secret ──
-document.getElementById('secret-btn')?.addEventListener('click', () => {
-    const modal = document.getElementById('secret-modal');
-    if (!modal) return;
-    modal.classList.remove('hidden');
-    typeWriter(secretContent, "secret-text", 25);
-});
-
 // ── Init ──
 window.onload = () => {
     typeWriter(mainText, "typing-text", 40);
+
+    document.getElementById('secret-btn')?.addEventListener('click', () => {
+        const modal = document.getElementById('secret-modal');
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        typeWriter(secretContent, "secret-text", 25);
+    });
 };
