@@ -1,6 +1,8 @@
 const mainText = "Sometimes, memories are mirrors. One reflects the past, the other shows who you're becoming.";
 const letterContent = "This journey wasn't about the destination, but the echoes we left behind. Everything has its own timing. Stay brave.";
 
+const secretContent = "I kept every version of you — the laugh you tried to hide, the way you said my name like it meant something. I don't know when I started memorizing you. Maybe from the very first time. Maybe I never stopped.\n\nPeople say time heals. But time just taught me how to carry it better. How to smile without letting it show. How to hear our song and not fall apart — at least not where anyone can see.\n\nYou were never just a memory. You were the standard. The one I keep comparing every almost-love to. And they always fall short. Not because they're not enough — but because they're not you.\n\nMaybe in another life, the timing was right. Maybe in another world, I was brave enough to say it before it was too late. But here, in this one — I just have this. A shrine. A song. And the quiet hope that somewhere, somehow, you still think of me too.";
+
 const lyricsWords = ["Someday,", "I'll", "see", "you", "again.", "Maybe", "not", "in", "this", "time,", "maybe", "not", "in", "this", "world.", "But", "I", "know", "that", "one", "day,", "in", "another", "place,", "we'll", "meet", "again."];
 
 function typeWriter(text, id, speed, callback) {
@@ -10,8 +12,13 @@ function typeWriter(text, id, speed, callback) {
     element.innerHTML = "";
     function typing() {
         if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
+            if (text.charAt(i) === '\n' && text.charAt(i+1) === '\n') {
+                element.innerHTML += "<br><br>";
+                i += 2;
+            } else {
+                element.innerHTML += text.charAt(i);
+                i++;
+            }
             setTimeout(typing, speed);
         } else if (callback) {
             callback();
@@ -89,7 +96,6 @@ function toggleAudio() {
     if (!audio || !btn) return;
 
     if (audio.paused) {
-        // reset semua dulu
         hideSomedayWords();
         hideLyricLines();
         if (subLyrics) subLyrics.classList.remove('show');
@@ -100,13 +106,11 @@ function toggleAudio() {
         if (backsound) backsound.play().catch(e => console.error("Backsound error:", e));
         btn.textContent = "Pause Memory";
 
-        // do you think duluan
         setTimeout(() => {
             if (subLyrics) subLyrics.classList.add('show');
             showLyricLines();
         }, 100);
 
-        // Someday 1.8 detik kemudian
         somedayTimeout = setTimeout(() => {
             showSomedayWords();
         }, 1800);
@@ -132,9 +136,12 @@ function toggleLetter() {
     }
 }
 
-// ── Secret Button ──
+// ── Unveil Secret ──
 document.getElementById('secret-btn')?.addEventListener('click', () => {
-    document.getElementById('easter-egg')?.classList.remove('hidden');
+    const modal = document.getElementById('secret-modal');
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    typeWriter(secretContent, "secret-text", 25);
 });
 
 // ── Init ──
