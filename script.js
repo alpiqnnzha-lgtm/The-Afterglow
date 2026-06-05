@@ -1,6 +1,5 @@
 const mainText = "Sometimes, memories are mirrors. One reflects the past, the other shows who you're becoming.";
 const letterContent = "This journey wasn't about the destination, but the echoes we left behind. Everything has its own timing. Stay brave.";
-
 const secretContent = "I kept every version of you — the laugh you tried to hide, the way you said my name like it meant something. I don't know when I started memorizing you. Maybe from the very first time. Maybe I never stopped.\n\nPeople say time heals. But time just taught me how to carry it better. How to smile without letting it show. How to hear our song and not fall apart — at least not where anyone can see.\n\nYou were never just a memory. You were the standard. The one I keep comparing every almost-love to. And they always fall short. Not because they're not enough — but because they're not you.\n\nMaybe in another life, the timing was right. Maybe in another world, I was brave enough to say it before it was too late. But here, in this one — I just have this. A shrine. A song. And the quiet hope that somewhere, somehow, you still think of me too.";
 
 const lyricsPhrases = [
@@ -27,9 +26,7 @@ function typeWriter(text, id, speed, callback) {
                 i++;
             }
             setTimeout(typing, speed);
-        } else if (callback) {
-            callback();
-        }
+        } else if (callback) callback();
     }
     typing();
 }
@@ -41,19 +38,15 @@ let somedayTimeout = null;
 function showSomedayWords() {
     const el = document.getElementById('lyrics-text');
     if (!el) return;
-
     el.innerHTML = "";
     el.style.cssText = "opacity:0; transition: opacity 0.8s ease;";
-
     lyricsPhrases.forEach((phrase) => {
         const span = document.createElement('span');
         span.textContent = phrase + " ";
         span.style.cssText = "opacity:0; transition: opacity 0.8s ease; display:inline;";
         el.appendChild(span);
     });
-
     setTimeout(() => { el.style.opacity = "1"; }, 50);
-
     const spans = el.querySelectorAll('span');
     let idx = 0;
     function nextPhrase() {
@@ -106,47 +99,35 @@ function toggleAudio() {
         hideSomedayWords();
         hideLyricLines();
         if (subLyrics) subLyrics.classList.remove('show');
-
         audio.currentTime = 0;
         if (backsound) backsound.currentTime = 0;
         audio.play().catch(e => console.error("Audio error:", e));
         if (backsound) backsound.play().catch(e => console.error("Backsound error:", e));
         btn.textContent = "Pause Memory";
-
         setTimeout(() => {
             if (subLyrics) subLyrics.classList.add('show');
             showLyricLines();
         }, 100);
-
-        somedayTimeout = setTimeout(() => {
-            showSomedayWords();
-        }, 1700);
-
+        somedayTimeout = setTimeout(() => { showSomedayWords(); }, 1700);
     } else {
         audio.pause();
         if (backsound) backsound.pause();
         btn.textContent = "Play Memory";
-
         hideSomedayWords();
         if (subLyrics) subLyrics.classList.remove('show');
         hideLyricLines();
     }
 }
 
-// ── Letter Modal ──
+// ── Modals ──
 function toggleLetter() {
     const modal = document.getElementById('letter-modal');
-    if (!modal) return;
     modal.classList.toggle('hidden');
-    if (!modal.classList.contains('hidden')) {
-        typeWriter(letterContent, "letter-text", 30);
-    }
+    if (!modal.classList.contains('hidden')) typeWriter(letterContent, "letter-text", 30);
 }
 
-// ── Init ──
 window.onload = () => {
     typeWriter(mainText, "typing-text", 40);
-
     document.getElementById('secret-btn')?.addEventListener('click', () => {
         const modal = document.getElementById('secret-modal');
         if (!modal) return;
