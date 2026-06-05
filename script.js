@@ -3,7 +3,14 @@ const letterContent = "This journey wasn't about the destination, but the echoes
 
 const secretContent = "I kept every version of you — the laugh you tried to hide, the way you said my name like it meant something. I don't know when I started memorizing you. Maybe from the very first time. Maybe I never stopped.\n\nPeople say time heals. But time just taught me how to carry it better. How to smile without letting it show. How to hear our song and not fall apart — at least not where anyone can see.\n\nYou were never just a memory. You were the standard. The one I keep comparing every almost-love to. And they always fall short. Not because they're not enough — but because they're not you.\n\nMaybe in another life, the timing was right. Maybe in another world, I was brave enough to say it before it was too late. But here, in this one — I just have this. A shrine. A song. And the quiet hope that somewhere, somehow, you still think of me too.";
 
-const lyricsWords = ["Someday,", "I'll", "see", "you", "again.", "Maybe", "not", "in", "this", "time,", "maybe", "not", "in", "this", "world.", "But", "I", "know", "that", "one", "day,", "in", "another", "place,", "we'll", "meet", "again."];
+const lyricsPhrases = [
+    "Someday, I'll see you again.",
+    "Maybe not in this time,",
+    "maybe not in this world.",
+    "But I know that one day,",
+    "in another place,",
+    "we'll meet again."
+];
 
 function typeWriter(text, id, speed, callback) {
     const element = document.getElementById(id);
@@ -27,7 +34,7 @@ function typeWriter(text, id, speed, callback) {
     typing();
 }
 
-// ── Someday fade-in per kata ──
+// ── Someday fade-in per frasa ──
 let wordTimer = null;
 let somedayTimeout = null;
 
@@ -38,10 +45,10 @@ function showSomedayWords() {
     el.innerHTML = "";
     el.style.cssText = "opacity:0; transition: opacity 0.8s ease;";
 
-    lyricsWords.forEach((word) => {
+    lyricsPhrases.forEach((phrase) => {
         const span = document.createElement('span');
-        span.textContent = word + " ";
-        span.style.cssText = "opacity:0; transition: opacity 0.6s ease; display:inline;";
+        span.textContent = phrase + " ";
+        span.style.cssText = "opacity:0; transition: opacity 0.8s ease; display:inline;";
         el.appendChild(span);
     });
 
@@ -49,13 +56,13 @@ function showSomedayWords() {
 
     const spans = el.querySelectorAll('span');
     let idx = 0;
-    function nextWord() {
+    function nextPhrase() {
         if (idx >= spans.length) return;
         spans[idx].style.opacity = "1";
         idx++;
-        wordTimer = setTimeout(nextWord, 300);
+        wordTimer = setTimeout(nextPhrase, 1800);
     }
-    setTimeout(nextWord, 500);
+    setTimeout(nextPhrase, 500);
 }
 
 function hideSomedayWords() {
