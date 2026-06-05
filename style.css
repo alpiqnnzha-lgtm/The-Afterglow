@@ -19,6 +19,7 @@ body, html {
     will-change: transform;
     min-width: 100vw;
     min-height: 100vh;
+    pointer-events: none;
 }
 
 /* ── Container ── */
