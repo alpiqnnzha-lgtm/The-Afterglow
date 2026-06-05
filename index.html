@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Shrine</title>
-    <base href="/The-Afterglow/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <video autoplay muted loop playsinline class="bg-video">
-        <source src="background.mp4" type="video/mp4">
-    </video>
+    <img src="background.gif" class="bg-video" alt="">
 
     <div class="container">
+
         <h1 id="typing-text" class="fade-in"></h1>
 
         <div class="gallery-grid">
@@ -26,15 +27,16 @@
         </div>
 
         <div class="bottom-content-section">
+
             <div class="lyrics-container">
                 <p id="lyrics-text" class="bold-lyrics"></p>
             </div>
 
             <div class="sub-lyrics-section" id="about-you-section">
                 <div class="divider"></div>
-                <div class="lyric-line">do you think I have forgotten?</div>
-                <div class="lyric-line">do you think I have forgotten?</div>
-                <div class="lyric-line">do you think I have forgotten about you?</div>
+                <span class="lyric-line">do you think I have forgotten?</span>
+                <span class="lyric-line">do you think I have forgotten?</span>
+                <span class="lyric-line">do you think I have forgotten about you?</span>
             </div>
 
             <audio id="audio" loop preload="auto">
@@ -45,6 +47,7 @@
             </audio>
 
             <button onclick="toggleAudio()" class="neon-btn" id="play-btn">Play Memory</button>
+
         </div>
 
         <div class="bottom-section">
@@ -53,6 +56,7 @@
                 <button onclick="toggleLetter()" class="neon-btn">Open The Letter</button>
             </div>
         </div>
+
     </div>
 
     <div id="letter-modal" class="hidden">
